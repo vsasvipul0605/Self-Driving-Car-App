@@ -31,19 +31,21 @@ while True:
 
     # draw rectangle around cars 
     for(x, y, w, h) in cars:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 5)
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 5)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 2)
     # draw rectangle around pedestrians 
     for(x, y, w, h) in pedestrians:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 5)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,255), 5)
 
     # display the video
     cv2.imshow('Self Driving Car App',frame)
-    cv2.waitKey(1)
+    key = cv2.waitKey(1)
 
     # stop if q key pressed
     if key==81 or key==113:
         break   
+
+# release the VideoCapture object
+video.release()
 
 """
 # detect cars 
