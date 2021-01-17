@@ -11,7 +11,7 @@ grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # create car classifier
 car_tracker = cv2.CascadeClassifier('car.xml')
 # haarcascade_fullbody classifier
-pedestrian_tracker = cv2.CascadeClassifier('haarcascade+_fullbody.xml')
+pedestrian_tracker = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fullbody.xml')
 
 while True:
     # read the current frame
@@ -25,15 +25,25 @@ while True:
         break
 
     # detect cars 
-    cars=car_tracker.detectMultiScale(grayscale_vid)
+    cars = car_tracker.detectMultiScale(grayscale_vid)
+    # detect pedestrians 
+    pedestrians = pedestrian_tracker.detectMultiScale(grayscale_vid)
 
     # draw rectangle around cars 
     for(x, y, w, h) in cars:
         cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 5)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 5)
+    # draw rectangle around pedestrians 
+    for(x, y, w, h) in pedestrians:
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 5)
 
     # display the video
     cv2.imshow('Self Driving Car App',frame)
     cv2.waitKey(1)
+
+    # stop if q key pressed
+    if key==81 or key==113:
+        break   
 
 """
 # detect cars 
