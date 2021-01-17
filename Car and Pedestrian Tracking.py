@@ -2,16 +2,16 @@ import cv2
 
 # create opencv image
 img = cv2.imread('car.png')
-video = cv2.VideoCapture('Teslas Avoiding Accidents Compilation.mp4')
+# video = cv2.VideoCapture('Teslas Avoiding Accidents Compilation.mp4')
+video = cv2.VideoCapture('videoplayback.mp4')
 
 # convert to grayscale
 grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# our pre-trained car classifier
-classifier_file = 'car.xml'
-
 # create car classifier
-car_tracker = cv2.CascadeClassifier(classifier_file)
+car_tracker = cv2.CascadeClassifier('car.xml')
+# haarcascade_fullbody classifier
+pedestrian_tracker = cv2.CascadeClassifier('haarcascade+_fullbody.xml')
 
 while True:
     # read the current frame
