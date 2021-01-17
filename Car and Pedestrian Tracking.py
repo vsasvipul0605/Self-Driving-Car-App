@@ -20,10 +20,22 @@ while True:
     # safe coding
     if read_successful:
         # convert to grayscale 
-        grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        grayscale_vid = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     else:
         break
 
+    # detect cars 
+    cars=car_tracker.detectMultiScale(grayscale_vid)
+
+    # draw rectangle around cars 
+    for(x, y, w, h) in cars:
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 5)
+
+    # display the video
+    cv2.imshow('Self Driving Car App',frame)
+    cv2.waitKey(1)
+
+"""
 # detect cars 
 cars=car_tracker.detectMultiScale(grayscale)
 print(cars)
@@ -36,4 +48,5 @@ for(x, y, w, h) in cars:
 # display the image with faces spotted
 cv2.imshow('Self Driving Car App',img)
 cv2.waitKey()
+"""
 print("Made by Vipul Sinha")
