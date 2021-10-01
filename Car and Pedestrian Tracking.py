@@ -41,7 +41,7 @@ while True:
     key = cv2.waitKey(1)
 
     # stop if q key pressed
-    if key==81 or key==113:
+    if key== ord('q'): # ord() return unicode of passing character
         break   
 
 # release the VideoCapture object
